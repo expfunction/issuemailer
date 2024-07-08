@@ -16,9 +16,10 @@ const SMTP_PORT = process.env.SMTP_PORT;
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 const RECIPIENT_EMAIL = process.env.RECIPIENT_EMAIL;
+const SENDER_EMAIL = process.env.SENDER_EMAIL;
 
 // Express
-app.post('api/ReportIssue', (req, res) => {
+app.post('/api/ReportIssue', (req, res) => {
     // Get request properties from request body
     const imagepath = req.body.imagepath,
         userguid = req.body.userguid,
@@ -50,7 +51,7 @@ app.post('api/ReportIssue', (req, res) => {
     })
 
     let mailOptions = {
-        from: 'support@lixhium.com',
+        from: SENDER_EMAIL,
         to: RECIPIENT_EMAIL,
         subject: "Lixhium Support Request",
         text: `Imagepath:${imagepath}\n Userguid: ${userguid}\nStationid: ${stationid}\nExplanation: ${explanation}\nIletisime_gecilsin: ${iletisime_gecilsin}\nTelefon: ${telefon}\nMail: ${mail}`,
